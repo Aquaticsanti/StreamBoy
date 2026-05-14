@@ -3,6 +3,20 @@ import numpy
 import os
 import time
 import datetime
+import http.client as httplib
+
+
+# function to check internet connectivity, from https://www.geeksforgeeks.org/python/how-to-check-whether-users-internet-is-on-or-off-using-python/
+def checkInternet(url="www.google.com", timeout=3):
+    connection = httplib.HTTPConnection(url, timeout=timeout)
+    try:
+        # only header requested for fast operation
+        connection.request("HEAD", "/")
+        connection.close()  # connection closed
+        return True
+    except:
+        return False
+    
 
 width, height = 320, 240
 if pygame.IS_CE != 1: # AKA the current pygame module is NOT pygame-ce
