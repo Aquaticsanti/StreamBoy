@@ -5,7 +5,8 @@ import time
 import datetime
 
 width, height = 320, 240
-
+if pygame.IS_CE != 1: # AKA the current pygame module is NOT pygame-ce
+    raise ModuleNotFoundError("Uh oh! This program expects pygame-ce, NOT regular pygame.")
 screen = pygame.display.set_mode((width, height))
 pygame.display.set_caption("StreamBoy \"Emulator\"")
 pygame.font.init()
