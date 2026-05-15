@@ -99,6 +99,67 @@ def DrawHomeMenu():
     appsRect1.center = (207.5, 170)
     screen.blit(apps_logo, appsRect1)
 
+def DrawSettingsMenu():
+    global screen, primaryColor, secondaryColor, font, font_smol
+    ## Draw go back option
+    # Draw go back arrow
+    goBack_logo = pygame.image.load_sized_svg("icons\\arrow_back_ios_new.svg", (30, 30)).convert_alpha()
+    goBackRect1 = goBack_logo.get_rect()
+    goBackRect1.center = (35, 60)
+    screen.blit(goBack_logo, goBackRect1)
+    # Draw go back text
+    GoBackText_render = font.render("Go back", False, (255, 255, 255))
+    GoBackTextRect1 = GoBackText_render.get_rect()
+    GoBackTextRect1.center = (130, 64)
+    screen.blit(GoBackText_render, GoBackTextRect1)
+
+    ## Draw divider line
+    divLine = pygame.draw.line(surface=screen, color=(255, 255, 255), start_pos=(0, 85), end_pos=(width, 85))
+
+    ## Draw wifi option
+    # Draw wifi logo
+    wifi_logo = pygame.image.load_sized_svg("icons\\wifi.svg", (45, 45)).convert_alpha()
+    wifi_logo.fill(primaryColor, special_flags=pygame.BLEND_RGBA_MULT)
+    wifiRect1 = wifi_logo.get_rect()
+    wifiRect1.center = (35, 107.5)
+    screen.blit(wifi_logo, wifiRect1)
+    # Load "wifi" text
+    wifiText_render = font.render("Wi-Fi", False, (255, 255, 255))
+    wifiTextRect1 = wifiText_render.get_rect()
+    wifiTextRect1.center = (110, 112.5)
+    screen.blit(wifiText_render, wifiTextRect1)
+
+    ## Draw (another) divider line
+    divLine = pygame.draw.line(surface=screen, color=(255, 255, 255), start_pos=(0, 132.5), end_pos=(width, 132.5))
+
+    ## Draw bluetooth option
+    # Draw bluetooth logo
+    bluetooth_logo = pygame.image.load_sized_svg("icons\\bluetooth.svg", (45, 45)).convert_alpha()
+    bluetooth_logo.fill(primaryColor, special_flags=pygame.BLEND_RGBA_MULT)
+    bluetoothRect1 = bluetooth_logo.get_rect()
+    bluetoothRect1.center = (35, 157.5)
+    screen.blit(bluetooth_logo, bluetoothRect1)
+    # Load "bluetooth" text
+    bluetoothText_render = font.render("Bluetooth", False, (255, 255, 255))
+    bluetoothTextRect1 = bluetoothText_render.get_rect()
+    bluetoothTextRect1.center = (145, 160)
+    screen.blit(bluetoothText_render, bluetoothTextRect1)
+
+    ## Draw (yet another) divider line
+    divLine = pygame.draw.line(surface=screen, color=(255, 255, 255), start_pos=(0, 185), end_pos=(width, 185))
+
+    ## Draw bluetooth option
+    # Draw bluetooth logo
+    color_logo = pygame.image.load_sized_svg("icons\\format_paint.svg", (45, 45)).convert_alpha()
+    color_logo.fill(primaryColor, special_flags=pygame.BLEND_RGBA_MULT)
+    colorRect1 = color_logo.get_rect()
+    colorRect1.center = (35, 212.5)
+    screen.blit(color_logo, colorRect1)
+    # Load "color" text
+    colorText_render = font.render("Colors", False, (255, 255, 255))
+    colorTextRect1 = colorText_render.get_rect()
+    colorTextRect1.center = (120, 215)
+    screen.blit(colorText_render, colorTextRect1)
 selected_option = -1
 def godFunc():
     """Yes, this will be deleted later. Please tell me you didn't actually believe this was permanent?"""
