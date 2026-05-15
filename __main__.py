@@ -109,7 +109,7 @@ appsRect1.center = (207.5, 170)
 screen.blit(apps_logo, appsRect1)
 
 selected_option = -1
-def thatOneFunctionThatSavesTheWholeProgram():
+def godFunc():
     """Yes, this will be deleted later. Please tell me you didn't actually believe this was permanent?"""
     global usrInput, running, selected_option
     usrInput = input("What do you want to do? (h for help): ")
@@ -129,7 +129,7 @@ def thatOneFunctionThatSavesTheWholeProgram():
     elif usrInput == "help" or usrInput == "h":
         print("q/quit to exit")
 
-thready = threading.Thread(target=thatOneFunctionThatSavesTheWholeProgram)
+thready = threading.Thread(target=godFunc)
 selectRect = pygame.draw.rect(screen, (255, 255, 255), (400, 400, 2, 2), 5)
 # Loop
 pygame.display.flip()
@@ -137,7 +137,7 @@ running = True
 while running:
     pygame.event.pump()
     if thready.is_alive() == False:
-        thready = threading.Thread(target=thatOneFunctionThatSavesTheWholeProgram)
+        thready = threading.Thread(target=godFunc)
         thready.start()
     if selected_option == 0: # Music option
         selectRect = pygame.draw.rect(screen, (0, 0, 0), (selectRect.x, selectRect.y, selectRect.w, selectRect.h), 5, 60)
