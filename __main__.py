@@ -110,17 +110,29 @@ appsRect1 = apps_logo.get_rect()
 appsRect1.center = (207.5, 170)
 screen.blit(apps_logo, appsRect1)
 
+selected_option = -1
 def thatOneFunctionThatSavesTheWholeProgram():
     """Yes, this will be deleted later. Please tell me you didn't actually believe this was permanent?"""
-    global usrInput, running
+    global usrInput, running, selected_option
     usrInput = input("What do you want to do? (h for help): ")
     if usrInput == "quit" or usrInput == "q":
         running = False
         os._exit(0)
+    elif usrInput == "l" or usrInput == "left":
+        selected_option -= 1
+        if selected_option < 0:
+            selected_option = 2
+        print(f"selected_option = {selected_option}")
+    elif usrInput == "r" or usrInput == "right":
+        selected_option += 1
+        if selected_option > 2:
+            selected_option = 0
+        print(f"selected_option = {selected_option}")
     elif usrInput == "help" or usrInput == "h":
         print("q/quit to exit")
 
 thready = threading.Thread(target=thatOneFunctionThatSavesTheWholeProgram)
+selectRect = pygame.draw.rect(screen, (255, 255, 255), (400, 400, 2, 2), 5)
 # Loop
 pygame.display.flip()
 running = True
@@ -129,6 +141,25 @@ while running:
     if thready.is_alive() == False:
         thready = threading.Thread(target=thatOneFunctionThatSavesTheWholeProgram)
         thready.start()
+    if selected_option == 0: # Music option
+        selectRect = pygame.draw.rect(screen, (0, 0, 0), (selectRect.x, selectRect.y, selectRect.w, selectRect.h), 5, 60)
+        selectRect = pygame.draw.rect(screen, (255, 255, 255), (69, 70, 185, 70), 5, -1)
+        pygame.display.flip()
+    if selected_option == 1: # Settings option.
+        if selectRect.x == 69:
+            selectRect = pygame.draw.rect(screen, (0, 0, 0), (selectRect.x, selectRect.y, selectRect.w, selectRect.h), 5)
+        else:
+            selectRect = pygame.draw.rect(screen, (0, 0, 0), (selectRect.x, selectRect.y, selectRect.w, selectRect.h), 5, 60)
+        selectRect = pygame.draw.rect(screen, (255, 255, 255), (68, 140, 90, 60), 5, 60)
+        pygame.display.flip()
+    if selected_option == 2: # Apps option
+        if selectRect.x == 69:
+            selectRect = pygame.draw.rect(screen, (0, 0, 0), (selectRect.x, selectRect.y, selectRect.w, selectRect.h), 5)
+        else:
+            selectRect = pygame.draw.rect(screen, (0, 0, 0), (selectRect.x, selectRect.y, selectRect.w, selectRect.h), 5, 60)
+        selectRect = pygame.draw.rect(screen, (0, 0, 0), (selectRect.x, selectRect.y, selectRect.w, selectRect.h), 5)
+        selectRect = pygame.draw.rect(screen, (255, 255, 255), (162.5, 140, 90, 60), 5, 60)
+        pygame.display.flip()
 
 # Quit Pygame
 pygame.quit()
