@@ -90,6 +90,25 @@ musicText_render = font.render("Music", False, (255, 255, 255))
 musicTextRect1 = musicText_render.get_rect()
 musicTextRect1.center = (192.5, 107.5)
 screen.blit(musicText_render, musicTextRect1)
+
+## Load settings button
+# Load settings button background
+settings_bg = pygame.draw.rect(surface=screen, color=secondaryColor, rect=(72.5, 145, 80, 50), border_radius=60)
+# Load settings logo
+settings_logo = pygame.image.load_sized_svg("icons\\settings.svg", (47.5, 47.5)).convert_alpha()
+settingsRect1 = settings_logo.get_rect()
+settingsRect1.center = (112.5, 170)
+screen.blit(settings_logo, settingsRect1)
+
+## Load apps button
+# Load apps button background
+apps_bg = pygame.draw.rect(surface=screen, color=secondaryColor, rect=(167.5, 145, 80, 50), border_radius=60)
+# Load apps logo
+apps_logo = pygame.image.load_sized_svg("icons\\apps.svg", (47.5, 47.5)).convert_alpha()
+appsRect1 = apps_logo.get_rect()
+appsRect1.center = (207.5, 170)
+screen.blit(apps_logo, appsRect1)
+
 # Loop
 pygame.display.flip()
 running = True
