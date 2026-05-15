@@ -4,6 +4,7 @@ import os
 import time
 import datetime
 import http.client as httplib
+import threading
 
 
 # function to check internet connectivity, from https://www.geeksforgeeks.org/python/how-to-check-whether-users-internet-is-on-or-off-using-python/
@@ -109,13 +110,25 @@ appsRect1 = apps_logo.get_rect()
 appsRect1.center = (207.5, 170)
 screen.blit(apps_logo, appsRect1)
 
+def thatOneFunctionThatSavesTheWholeProgram():
+    """Yes, this will be deleted later. Please tell me you didn't actually believe this was permanent?"""
+    global usrInput, running
+    usrInput = input("What do you want to do? (h for help): ")
+    if usrInput == "quit" or usrInput == "q":
+        running = False
+        os._exit(0)
+    elif usrInput == "help" or usrInput == "h":
+        print("q/quit to exit")
+
+thready = threading.Thread(target=thatOneFunctionThatSavesTheWholeProgram)
 # Loop
 pygame.display.flip()
 running = True
 while running:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
+    pygame.event.pump()
+    if thready.is_alive() == False:
+        thready = threading.Thread(target=thatOneFunctionThatSavesTheWholeProgram)
+        thready.start()
 
 # Quit Pygame
 pygame.quit()
