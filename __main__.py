@@ -34,7 +34,7 @@ font_smol = pygame.font.SysFont("freesansbold", 20)
 # Draw status bar background
 # NOTE: Right now, the color is fixed at blue. 
 # On actual hardware, you will be able to change this.
-pygame.draw.rect(surface=screen, color=(33, 95, 154),
+pygame.draw.rect(surface=screen, color=primaryColor,
                  rect=(0, 0, width, 40))
 
 # Load system time
@@ -75,6 +75,21 @@ audioRect1 = audio_logo.get_rect()
 audioRect1.center = (180, 22.5)
 screen.blit(audio_logo, audioRect1)
 
+## Load music button
+# Load music button background
+music_bg = pygame.draw.rect(surface=screen, color=primaryColor, rect=(97.5, 80, 150, 50), border_radius=60)
+# Load music logo
+music_logo = pygame.image.load_sized_svg("icons\\music_note_2.svg", (50, 50)).convert_alpha()
+musicRect1 = music_logo.get_rect()
+musicRect1.center = (107.5, 105)
+musicCircle2 = pygame.draw.circle(surface=screen, center=musicRect1.center, color=(0, 0, 0), radius=37.5)
+musicCircle1 = pygame.draw.circle(surface=screen, center=musicRect1.center, color=secondaryColor, radius=30)
+screen.blit(music_logo, musicRect1)
+# Load "Music" text
+musicText_render = font.render("Music", False, (255, 255, 255))
+musicTextRect1 = musicText_render.get_rect()
+musicTextRect1.center = (192.5, 107.5)
+screen.blit(musicText_render, musicTextRect1)
 # Loop
 pygame.display.flip()
 running = True
