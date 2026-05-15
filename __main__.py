@@ -160,6 +160,25 @@ def DrawSettingsMenu():
     colorTextRect1 = colorText_render.get_rect()
     colorTextRect1.center = (120, 215)
     screen.blit(colorText_render, colorTextRect1)
+
+primaryColor, secondaryColor = (33, 95, 154), (22, 62, 100)
+width, height = 320, 240
+
+if pygame.IS_CE != 1: # AKA the current pygame module is NOT pygame-ce
+    raise ModuleNotFoundError("Uh oh! This program expects pygame-ce, NOT regular pygame.")
+
+screen = pygame.display.set_mode((width, height))
+pygame.display.set_caption("StreamBoy \"Emulator\"")
+
+# Initialize fonts
+pygame.font.init()
+font = pygame.font.SysFont("freesansbold", 30)
+font_smol = pygame.font.SysFont("freesansbold", 20)
+
+DrawStatusBar()
+DrawHomeMenu()
+#DrawSettingsMenu()
+
 selected_option = -1
 def godFunc():
     """Yes, this will be deleted later. Please tell me you didn't actually believe this was permanent?"""
