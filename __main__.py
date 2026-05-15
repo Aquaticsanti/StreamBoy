@@ -18,7 +18,9 @@ def checkInternet(url="www.google.com", timeout=3):
         return False
     
 
+primaryColor, secondaryColor = (33, 95, 154), (22, 62, 100)
 width, height = 320, 240
+
 if pygame.IS_CE != 1: # AKA the current pygame module is NOT pygame-ce
     raise ModuleNotFoundError("Uh oh! This program expects pygame-ce, NOT regular pygame.")
 screen = pygame.display.set_mode((width, height))
