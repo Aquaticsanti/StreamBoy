@@ -55,7 +55,7 @@ screen.blit(battery_logo, batteryRect1)
 # When this is ported to actual hardware, this will change.
 batteryText_render = font_smol.render("bat%", False, (255, 255, 255))
 batteryTextRect1 = batteryText_render.get_rect()
-batteryTextRect1.center = (265, 22.5)
+batteryTextRect1.midright = (292.5, 22.5)
 screen.blit(batteryText_render, batteryTextRect1)
 
 # Load Wifi logo
