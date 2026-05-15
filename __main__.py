@@ -20,6 +20,7 @@ def checkInternet(url="www.google.com", timeout=3):
     
 
 def DrawStatusBar():
+    global screen, primaryColor, secondaryColor, font, font_smol
     # Draw status bar background
     pygame.draw.rect(surface=screen, color=primaryColor,
                     rect=(0, 0, width, 40))
