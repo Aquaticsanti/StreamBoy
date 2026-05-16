@@ -175,14 +175,13 @@ pygame.font.init()
 font = pygame.font.SysFont("freesansbold", 30)
 font_smol = pygame.font.SysFont("freesansbold", 20)
 
-DrawStatusBar()
-DrawHomeMenu()
-#DrawSettingsMenu()
 
-selected_option = -1
+menu = "home"
+selected_option = 42
+option_hasBeen_selected = False
 def godFunc():
     """Yes, this will be deleted later. Please tell me you didn't actually believe this was permanent?"""
-    global usrInput, running, selected_option
+    global usrInput, running, selected_option, option_hasBeen_selected
     usrInput = input("What do you want to do? (h for help): ")
     if usrInput == "quit" or usrInput == "q":
         running = False
@@ -201,33 +200,91 @@ def godFunc():
 
 thready = threading.Thread(target=godFunc)
 selectRect = pygame.draw.rect(screen, (255, 255, 255), (400, 400, 2, 2), 5)
+
 # Loop
 pygame.display.flip()
 running = True
 while running:
+    pygame.draw.rect(screen, (0, 0, 0), (0, 0, width, height))
+    DrawStatusBar()
     pygame.event.pump()
     if thready.is_alive() == False:
         thready = threading.Thread(target=godFunc)
         thready.start()
-    if selected_option == 0: # Music option
-        selectRect = pygame.draw.rect(screen, (0, 0, 0), (selectRect.x, selectRect.y, selectRect.w, selectRect.h), 5, 60)
-        selectRect = pygame.draw.rect(screen, (255, 255, 255), (69, 70, 185, 70), 5, -1)
-        pygame.display.flip()
-    if selected_option == 1: # Settings option.
-        if selectRect.x == 69:
-            selectRect = pygame.draw.rect(screen, (0, 0, 0), (selectRect.x, selectRect.y, selectRect.w, selectRect.h), 5)
+    if menu == "home":
+        DrawHomeMenu()
+        if selected_option > 2:
+            if selected_option == 42:
+                pass
+            else:
+                selected_option = 0
+        elif selected_option < 0:
+            selected_option = 2
+        if option_hasBeen_selected == False:
+            if selected_option == 0: # Music option
+                selectRect = pygame.draw.rect(screen, (0, 0, 0), (selectRect.x, selectRect.y, selectRect.w, selectRect.h), 5, 60)
+                selectRect = pygame.draw.rect(screen, (255, 255, 255), (69, 70, 185, 70), 5, -1)
+            if selected_option == 1: # Settings option.
+                if selectRect.x == 69:
+                    selectRect = pygame.draw.rect(screen, (0, 0, 0), (selectRect.x, selectRect.y, selectRect.w, selectRect.h), 5)
+                else:
+                    selectRect = pygame.draw.rect(screen, (0, 0, 0), (selectRect.x, selectRect.y, selectRect.w, selectRect.h), 5, 60)
+                selectRect = pygame.draw.rect(screen, (255, 255, 255), (68, 140, 90, 60), 5, 60)
+            if selected_option == 2: # Apps option
+                if selectRect.x == 69:
+                    selectRect = pygame.draw.rect(screen, (0, 0, 0), (selectRect.x, selectRect.y, selectRect.w, selectRect.h), 5)
+                else:
+                    selectRect = pygame.draw.rect(screen, (0, 0, 0), (selectRect.x, selectRect.y, selectRect.w, selectRect.h), 5, 60)
+                selectRect = pygame.draw.rect(screen, (0, 0, 0), (selectRect.x, selectRect.y, selectRect.w, selectRect.h), 5)
+                selectRect = pygame.draw.rect(screen, (255, 255, 255), (162.5, 140, 90, 60), 5, 60)
         else:
-            selectRect = pygame.draw.rect(screen, (0, 0, 0), (selectRect.x, selectRect.y, selectRect.w, selectRect.h), 5, 60)
-        selectRect = pygame.draw.rect(screen, (255, 255, 255), (68, 140, 90, 60), 5, 60)
-        pygame.display.flip()
-    if selected_option == 2: # Apps option
-        if selectRect.x == 69:
-            selectRect = pygame.draw.rect(screen, (0, 0, 0), (selectRect.x, selectRect.y, selectRect.w, selectRect.h), 5)
+            if selectRect.x == 69:
+                selectRect = pygame.draw.rect(screen, (0, 0, 0), (selectRect.x, selectRect.y, selectRect.w, selectRect.h), 5)
+            else:
+                selectRect = pygame.draw.rect(screen, (0, 0, 0), (selectRect.x, selectRect.y, selectRect.w, selectRect.h), 5, 60)
+            option_hasBeen_selected = False
+            if selected_option == 0: # Music option
+                raise Exception("Option not implemented yet")
+            if selected_option == 1: # Settings option
+                menu = "settings" 
+            if selected_option == 2: # Apps option
+                raise Exception("Option not implemented yet")
+            selected_option = 42
+    elif menu == "settings":
+        DrawSettingsMenu()
+        if selected_option > 3:
+            if selected_option == 42:
+                pass
+            else:
+                selected_option = 0
+        elif selected_option < 0:
+            selected_option = 3
+        if option_hasBeen_selected == False:
+            if selected_option == 0: # Go back option
+                selectRect = pygame.draw.rect(screen, (0, 0, 0), (selectRect.x, selectRect.y, selectRect.w, selectRect.h), 3)
+                selectRect = pygame.draw.rect(screen, (255, 255, 255), (0, 40, width, 45), 3)
+            elif selected_option == 1: # Wifi option
+                selectRect = pygame.draw.rect(screen, (0, 0, 0), (selectRect.x, selectRect.y, selectRect.w, selectRect.h), 3)
+                selectRect = pygame.draw.rect(screen, (255, 255, 255), (0, 85, width, 50), 3)
+            elif selected_option == 2: # Bluetooth option
+                selectRect = pygame.draw.rect(screen, (0, 0, 0), (selectRect.x, selectRect.y, selectRect.w, selectRect.h), 3)
+                selectRect = pygame.draw.rect(screen, (255, 255, 255), (0, 130, width, 55), 3)
+            elif selected_option == 3: # Colors option
+                selectRect = pygame.draw.rect(screen, (0, 0, 0), (selectRect.x, selectRect.y, selectRect.w, selectRect.h), 3)
+                selectRect = pygame.draw.rect(screen, (255, 255, 255), (0, 185, width, 55), 3)
         else:
-            selectRect = pygame.draw.rect(screen, (0, 0, 0), (selectRect.x, selectRect.y, selectRect.w, selectRect.h), 5, 60)
-        selectRect = pygame.draw.rect(screen, (0, 0, 0), (selectRect.x, selectRect.y, selectRect.w, selectRect.h), 5)
-        selectRect = pygame.draw.rect(screen, (255, 255, 255), (162.5, 140, 90, 60), 5, 60)
-        pygame.display.flip()
+            selectRect = pygame.draw.rect(screen, (0, 0, 0), (selectRect.x, selectRect.y, selectRect.w, selectRect.h), 3)
+            option_hasBeen_selected = False
+            if selected_option == 0: # Go back option
+                menu = "home"
+            if selected_option == 1: # Wifi option
+                raise Exception("Option not implemented yet") 
+            if selected_option == 2: # Bluetooth option
+                raise Exception("Option not implemented yet")
+            if selected_option == 3: # Colors option
+                raise Exception("Option not implemented yet")
+            selected_option = 42
+    pygame.display.flip()
 
 # Quit Pygame
 pygame.quit()
