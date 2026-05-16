@@ -189,14 +189,13 @@ def godFunc():
         os._exit(0)
     elif usrInput == "l" or usrInput == "left":
         selected_option -= 1
-        if selected_option < 0:
-            selected_option = 2
         print(f"selected_option = {selected_option}")
     elif usrInput == "r" or usrInput == "right":
         selected_option += 1
-        if selected_option > 2:
-            selected_option = 0
         print(f"selected_option = {selected_option}")
+    elif usrInput == "e" or usrInput == "enter":
+        option_hasBeen_selected = True
+        print(f"selected_option = {selected_option}, menu = {menu}")
     elif usrInput == "help" or usrInput == "h":
         print("q/quit to exit")
 
